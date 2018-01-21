@@ -1,7 +1,6 @@
 const FiltersSubprovider = require('web3-provider-engine/subproviders/filters.js');
 const HookedSubprovider = require('web3-provider-engine/subproviders/hooked-wallet.js');
 const Web3 = require('web3');
-const Transaction = require('ethereumjs-tx');
 const ProviderEngine = require('web3-provider-engine');
 const Web3Subprovider = require('web3-provider-engine/subproviders/web3.js');
 const ethUtils = require('ethereumjs-util');
@@ -19,11 +18,6 @@ function HDWalletProvider (privateKey, providerUrl) {
             getAccounts: function (cb) {
                 cb(null, [pkAddress])
             },
-            getPrivateKey: function (address, cb) {
-
-
-
-            },
             signTransaction: function (txParams, cb) {
 
                 const tx = new EthTx(txParams);
@@ -34,7 +28,7 @@ function HDWalletProvider (privateKey, providerUrl) {
             }
         })
     );
-    this.engine.addProvider(new FiltersSubprovider())
+    this.engine.addProvider(new FiltersSubprovider());
     this.engine.addProvider(
         new Web3Subprovider(new Web3.providers.HttpProvider(providerUrl))
     );
